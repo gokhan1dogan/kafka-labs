@@ -8,9 +8,9 @@ import org.slf4j.LoggerFactory;
 import java.util.Properties;
 
 
-public class ProducerDemoWithCallbacks {
+public class ProducerDemoWithKeys {
 
-    private static final Logger log = LoggerFactory.getLogger(ProducerDemoWithCallbacks.class.getSimpleName());
+    private static final Logger log = LoggerFactory.getLogger(ProducerDemoWithKeys.class.getSimpleName());
 
     public static void main(String[] args) {
         log.info("Start Kafka Producer !!");
@@ -29,8 +29,11 @@ public class ProducerDemoWithCallbacks {
         // Create a producer record
         for (int i=0; i<10; i++) {
 
+            String key = "ilkod_"  + i;
+            String value = "iladi_kafka_" + i;
+
             ProducerRecord<String, String> producerRecord =
-                    new ProducerRecord<>(topic, "kafka sistemine yeni il eklendi :" + i);
+                    new ProducerRecord<>(topic, key, value);
 
             // Send the data    -- asyncronous
             producer.send(producerRecord, new Callback() {
@@ -52,7 +55,7 @@ public class ProducerDemoWithCallbacks {
             });
             log.info("Kafka message is sent");
             try {
-                Thread.sleep(5000);
+                Thread.sleep(3000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
