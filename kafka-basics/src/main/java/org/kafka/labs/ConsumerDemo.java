@@ -4,7 +4,7 @@ import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
-import org.apache.kafka.clients.producer.KafkaProducer;
+
 import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,13 +22,14 @@ public class ConsumerDemo {
         // Create Consumer Properties
         String bootStrapServer = "127.0.0.1:9092";
         String topic = "cities";
-        Properties prop = new Properties();
+        String groupId = "javacitygrp";
 
+        Properties prop = new Properties();
         prop.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServer);
         prop.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         prop.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         prop.setProperty(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
-
+        prop.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);
         // Create Consumer
         KafkaConsumer<String, String> consumer = new KafkaConsumer<>(prop);
 
