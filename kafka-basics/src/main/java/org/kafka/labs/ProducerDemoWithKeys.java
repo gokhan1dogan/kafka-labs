@@ -23,6 +23,7 @@ public class ProducerDemoWithKeys {
         prop.setProperty(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, bootStrapServer);
         prop.setProperty(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
         prop.setProperty(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, StringSerializer.class.getName());
+
         prop.setProperty(ProducerConfig.BATCH_SIZE_CONFIG, Integer.toString(10));
         // Create the producer
         KafkaProducer<String, String> producer = new KafkaProducer<>(prop);
